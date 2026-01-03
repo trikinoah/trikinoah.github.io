@@ -11,6 +11,14 @@
 
 }
 
+body{
+	overflow-x: hidden;
+}
+
+img{
+	max-width: 100%;
+	height: auto;
+}
 
 html{
 	/* Pour pouvoir scroller lorsque je clique sur un lien */
@@ -132,19 +140,36 @@ html{
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	gap: 40px;
+	padding: 120px 40px 60px;
+	height: 100%;
 
 }
 .accueil .content-img {
 	width: 100%;
-	margin-top: 15VH;
+	max-width: none;
+	flex: 1 1 50%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 .accueil .content-img img {
 	opacity: 50%;
-	width: 75.7VH;
+	width: min(70vh, 560px);
+	height: min(70vh, 560px);
+	object-fit: cover;
+	object-position: 60% center;
+	border-radius: 50%;
+	border: 6px solid rgba(59, 142, 165, 0.7);
+	box-shadow: 0 0 0 10px rgba(23, 23, 23, 0.85), 0 25px 45px rgba(0, 0, 0, 0.45);
+	background-color: #171717;
 }
 
 .accueil section .content-banner{
 	text-align: center;
+	max-width: 680px;
+	flex: 1 1 50%;
 }
 .accueil section .content-banner h1{
 	font-size: 120px;
@@ -163,7 +188,8 @@ html{
 
 .accueil section .content-banner p {
 	margin: 20px auto;
-	width: 60%;
+	width: 100%;
+	max-width: 520px;
 	text-align: justify;
 	color: #D4D4D4;
 	opacity: 50%;
@@ -220,7 +246,7 @@ html{
 .apropos {
 	background-color: #0d0d0d;
 	color: #D4D4D4;
-	height: 100vh;
+	min-height: 100vh;
 	padding: 50px 20px;
 	
 }
@@ -238,6 +264,7 @@ html{
 .apropos .rows {
 	margin-top: 5vh;
 	display: flex;
+	gap: 30px;
 }
 .apropos .rows .infos {
 	width: 50%;
@@ -266,8 +293,8 @@ html{
 }
 
 .apropos .rows .infos .content-interests .interests {
-	width: 15vh;
-	height: 15vh;
+	width: 140px;
+	height: 140px;
 	background-color: #171717;
 	border-radius: 10px;
 	margin: 0 15px 15px 0;
@@ -279,8 +306,8 @@ html{
 }
 .apropos .rows .infos .content-interests .interests:hover {
 	background-color: #3B8EA5;
-	height: 20vh;
-	width: 20vh;
+	height: 170px;
+	width: 170px;
 }
 .apropos .rows .infos .content-interests .interests i {
 	font-size: 50px;
@@ -300,7 +327,7 @@ html{
 	margin: 0 5px;
 }
 .background {
-	height: 100vh;
+	min-height: 100vh;
 	background-color: #0d0d0d;
 	margin: 0;
 	padding: 0;
@@ -433,7 +460,7 @@ html{
 	background-color: #171717;
 	color: #D4D4D4;
 	padding: 50px 20px;
-	height: 100vh;
+	min-height: 100vh;
 	border-radius: 0 0 10vh 10vh;
 }
 .parcours .content-section {
@@ -467,13 +494,15 @@ html{
 	align-items: right;
 	width: 80%;
 	margin: auto;
+	flex-wrap: wrap;
+	gap: 10px;
 }
 .parcours .content-section .tabs .tabs-head .tabs-toggle{
 	background-color: #D4D4D4;
 	color: #171717;
 	display: flex;
 	box-shadow: inset 0 0 0 0 #3B8EA5;
-	width: 25%;
+	flex: 1 1 220px;
 	height: 50px;
 	align-items: center;
 	justify-content: center;
@@ -491,18 +520,13 @@ html{
 .parcours .content-section .tabs .tabs-body{
 	margin-top: 5vh;
 	display: flex;
-	justify-content: end;
+	justify-content: center;
 }
 .parcours .content-section .tabs .tabs-body .tabs-content {
-	opacity: 0;
-	position: absolute;
-	top: 40px;
+	display: none;
 }
 .parcours .content-section .tabs .tabs-body .tabs-content.is-active {
-	opacity: 1;
-	transition: .5s;
-	top: 0;
-	position: relative;
+	display: block;
 	width: 100%;
 
 }
@@ -521,8 +545,9 @@ html{
 	width: 150px;
 }
 .parcours .content-section .tabs .tabs-body .tabs-content .description{
-	width: 70vh;
-	margin: 10px 50px 10px 50px;
+	max-width: 560px;
+	width: 100%;
+	margin: 10px 30px 10px 30px;
 
 }
 .parcours .content-section .tabs .tabs-body .tabs-content .description h4 {
@@ -546,7 +571,7 @@ html{
 	background-color: #0d0d0d;
 	color: #D4D4D4;
 	padding: 50px 20px;
-	height: 100vh;
+	min-height: 100vh;
 }
 .skills .content-section {
 	max-width: 85%;
@@ -570,13 +595,15 @@ html{
 	align-items: stretch;
 	width: 80%;
 	margin: auto;
+	flex-wrap: wrap;
+	gap: 10px;
 }
 .skills .content-section .tabs .tabs-head .tabs-toggle{
 	background-color: #D4D4D4;
 	color: #171717;
 	display: flex;
 	box-shadow: inset 0 0 0 0 #3B8EA5;
-	width: 25%;
+	flex: 1 1 180px;
 	height: 50px;
 	align-items: center;
 	justify-content: center;
@@ -592,15 +619,9 @@ html{
 }
 .skills .content-section .tabs .tabs-content {
 	padding: 30px;
-	opacity: 0;
-	position: absolute;
-	top: 60px;
+	display: none;
 }
 .skills .content-section .tabs .tabs-content.is-active {
-	top: 0;
-	position: relative;
-	opacity: 1;
-	transition: .5s;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -608,8 +629,8 @@ html{
 
 .skills .content-section .tabs .tabs-content .content-skill {
 	position: relative;
-	width: 25vh;
-	height: 18vh;
+	width: clamp(180px, 26vw, 240px);
+	height: clamp(140px, 20vw, 180px);
 	background-color: #0d0d0d;
 	margin: 0 4vh 4vh 0;
 	display: flex;
@@ -695,7 +716,7 @@ html{
 	background-color: #171717;
 	color: #D4D4D4;
 	padding: 50px 20px;
-	height: 100vh;
+	min-height: 100vh;
 	border-radius: 10vh 10vh 0 0;
 }
 .portfolio .content-section {
@@ -713,6 +734,8 @@ html{
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-wrap: wrap;
+	gap: 30px;
 }
 .portfolio .card {
 	position: relative;
@@ -781,7 +804,7 @@ footer .content-section h2{
 /* FORMULAIRE */
 
 .contact {
-	height: 100vh;
+	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -790,11 +813,11 @@ footer .content-section h2{
 
 
 .contact > .form {
-	width: 40%;
+	width: min(900px, 92%);
 	margin: auto;
 	background-image: linear-gradient(#0d0d0d, #1f1f1f, #0d0d0d);
 	border: 2px solid #0d0d0d;
-	padding: 5rem 5rem;
+	padding: 3rem 3rem;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 35px;
@@ -944,4 +967,148 @@ footer .content-section h2{
 	top: 0;
 	visibility: visible;
 	opacity: 1;
+}
+
+@media (max-width: 1100px){
+	.accueil section {
+		flex-direction: column;
+		justify-content: center;
+		padding: 110px 30px 60px;
+	}
+	.accueil .content-img {
+		max-width: none;
+	}
+	.accueil .content-img img{
+		width: min(60vh, 460px);
+		height: min(60vh, 460px);
+	}
+	.accueil section .content-banner h1{
+		font-size: 86px;
+	}
+	.apropos .rows {
+		flex-direction: column;
+	}
+	.apropos .rows .infos {
+		width: 100%;
+	}
+	.parcours .content-section .tabs .tabs-body .tabs-content .content-section{
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 20px;
+	}
+	.parcours .content-section .tabs .tabs-body .tabs-content .description{
+		margin: 0;
+	}
+	.parcours .content-section .tabs .tabs-body .tabs-content .dates{
+		margin-left: 0;
+	}
+}
+
+@media (max-width: 900px){
+	.content-header header {
+		padding: 12px 16px;
+	}
+	.content-header header .logo a {
+		font-size: 28px;
+	}
+	.nav-responsive{
+		display: block;
+	}
+	.content-header header nav{
+		position: absolute;
+		top: 70px;
+		right: 16px;
+		background: #171717;
+		padding: 12px 16px;
+		border-radius: 12px;
+		display: none;
+	}
+	.content-header header nav.is-open{
+		display: block;
+	}
+	.content-header header nav ul{
+		flex-direction: column;
+		gap: 12px;
+	}
+	.accueil section .content-banner h1{
+		font-size: 72px;
+	}
+	.accueil section .content-banner h2{
+		font-size: 24px;
+	}
+	.skills .content-section .tabs .tabs-content {
+		padding: 20px 0;
+	}
+	.portfolio .card {
+		width: min(360px, 90vw);
+		height: 420px;
+		margin: 0;
+	}
+	.contact > .form {
+		grid-template-columns: 1fr;
+		padding: 2rem 1.5rem;
+		gap: 20px;
+	}
+	.form-group-email,
+	.form-group-msgtxt,
+	.form-message,
+	.form-group-send-btn{
+		grid-column: span 1;
+	}
+	.contact .form a {
+		margin-top: -40px;
+		margin-left: -30px;
+	}
+}
+
+@media (max-width: 600px){
+	.accueil section {
+		padding: 100px 20px 50px;
+	}
+	.accueil section .content-banner h1{
+		font-size: 56px;
+	}
+	.accueil .content-img {
+		max-width: 320px;
+	}
+	.accueil section .content-banner form .email-box{
+		flex-wrap: nowrap;
+		width: 100%;
+	}
+	#email-input{
+		width: 100%;
+	}
+	.email-box:hover > #email-input, #email-input:focus{
+		width: 100%;
+	}
+	.parcours .content-section .tabs .tabs-head .tabs-toggle{
+		flex: 1 1 140px;
+	}
+	.skills .content-section .tabs .tabs-head .tabs-toggle{
+		flex: 1 1 140px;
+	}
+	.portfolio .card .infos h3{
+		top: 70%;
+	}
+	.portfolio .card .infos p{
+		font-size: 14px;
+	}
+	.form-btn{
+		width: 60%;
+	}
+}
+
+@media (max-width: 420px){
+	.accueil section .content-banner h1{
+		font-size: 46px;
+	}
+	.accueil section .content-banner h2{
+		font-size: 20px;
+	}
+	.apropos h2,
+	.parcours h2,
+	.skills .content-section h2,
+	.portfolio .content-section h2{
+		font-size: 38px;
+	}
 }

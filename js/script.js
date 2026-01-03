@@ -1,19 +1,43 @@
 /*Tabs*/
 
-let tabs = document.querySelectorAll('.tabs-toggle'),
-	contents = document.querySelectorAll('.tabs-content');
+const nav = document.getElementById('nav');
+const navToggle = document.querySelector('.nav-responsive');
 
-tabs.forEach((tab, index) => {
-	tab.addEventListener('click', () => {
-		contents.forEach((content) => {
-			content.classList.remove('is-active');
-		});
-		tabs.forEach((tab) => {
-			tab.classList.remove('is-active');
-		});
+if (nav && navToggle) {
+	navToggle.addEventListener('click', () => {
+		nav.classList.toggle('is-open');
+	});
 
-		contents[index].classList.add('is-active');
-		tabs[index].classList.add('is-active');
+	nav.querySelectorAll('a').forEach((link) => {
+		link.addEventListener('click', () => {
+			nav.classList.remove('is-open');
+		});
+	});
+}
+
+document.querySelectorAll('.tabs').forEach((tabsBlock) => {
+	const tabs = tabsBlock.querySelectorAll('.tabs-toggle');
+	const contents = tabsBlock.querySelectorAll('.tabs-content');
+
+	if (tabs.length && contents.length) {
+		tabs[0].classList.add('is-active');
+		contents[0].classList.add('is-active');
+	}
+
+	tabs.forEach((tab, index) => {
+		tab.addEventListener('click', () => {
+			contents.forEach((content) => {
+				content.classList.remove('is-active');
+			});
+			tabs.forEach((tab) => {
+				tab.classList.remove('is-active');
+			});
+
+			if (contents[index]) {
+				contents[index].classList.add('is-active');
+			}
+			tab.classList.add('is-active');
+		});
 	});
 });
 
