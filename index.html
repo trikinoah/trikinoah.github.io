@@ -1,829 +1,503 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<title>Portfolio - Noah TRIKI</title>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
 </head>
 <body>
-	<!-- Scroll Bar -->
-	<div id="progressbar"></div>
-	<div id="scrollPath"></div>
-	<!-- Menu Entête -->
-		<div class="content-header">
-			<header>
-				<div class="logo">
-					<a href="https://www.linkedin.com/in/noah-triki/" target="_blank"><span class="couleur-bleu">TRIKI</span> Noah</a>
-				</div>
-				<nav id="nav">
-					<ul>
-						<li><a href="#accueil">Accueil</a></li>
-						<li><a href="#apropos">À propos</a></li>
-						<li><a href="#parcours">Parcours</a></li>
-						<li><a href="#skills">Compétences</a></li>
-						<li><a href="#portfolio">Portfolio</a></li>
-						<li><a href="#contact" onclick="toggle()">Contact</a></li>
-					</ul>
-				</nav>
-				<div class="nav-responsive">
-					<i class="fa-solid fa-bars"></i>
-				</div>
-			</header>
-		</div>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;scroll-behavior:smooth;}
+::selection{background:#4338CA;color:#fff;}
+@keyframes ntFloatA{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(36px,-34px) scale(1.1);}}
+@keyframes ntFloatB{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-30px,28px) scale(1.08);}}
+@keyframes ntPulse{0%{box-shadow:0 0 0 0 rgba(67,56,202,0.45);}70%{box-shadow:0 0 0 9px rgba(67,56,202,0);}100%{box-shadow:0 0 0 0 rgba(67,56,202,0);}}
+@keyframes ntMarquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@keyframes ntFloatY{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+</style>
+</helmet>
 
+<div style="min-height:100vh;background:#F8F7F3;font-family:'Hanken Grotesk',sans-serif;color:#1E2340;position:relative;">
 
+  <!-- scroll progress -->
+  <div style="position:fixed;top:0;left:0;width:100%;height:3px;z-index:200;pointer-events:none;">
+    <div id="nt-progress" style="height:100%;width:100%;background:#4338CA;transform:scaleX(0);transform-origin:left center;"></div>
+  </div>
 
-		<div class="general-content" id="blur">
+  <!-- ambient blobs -->
+  <div style="position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0;">
+    <div style="position:absolute;top:-140px;right:-90px;width:540px;height:540px;border-radius:50%;background:radial-gradient(circle,rgba(67,56,202,0.20),transparent 64%);filter:blur(44px);animation:ntFloatA 17s ease-in-out infinite;"></div>
+    <div style="position:absolute;bottom:-180px;left:-120px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(208,158,92,0.18),transparent 64%);filter:blur(54px);animation:ntFloatB 21s ease-in-out infinite;"></div>
+  </div>
 
-		<!-- Accueil -->
-			<div id="accueil" class="accueil">
-				<section>
-					<div class="content-img">
-						<img src="img/Photo_CV.png">
-					</div>
-					<div class="content-banner">
-						<h1><span>TRIKI</span> Noah</h1>
-						<h2>Chef de Projet IT</h2>
-						<p>Passionné par la finance, les bases de données et le rugby, je suis curieux mais aussi sérieux et j'ai toujours à cœur de bien faire ce que j'entreprends. </p>
-						<form action="submit">
-							<div class="email-box">
-								<button type="button" id="email-icon"><i class="fa-solid fa-envelope"></i></button>
-								<input type="email" id="email-input" placeholder="Recevoir CV par email">
-								<button type="submit" id="button-email"><i class="fa-solid fa-arrow-right"></i></button>
-							</div>
-						</form>
-					</div>
-				</section>
-			</div>
-		<!-- A propos -->
+  <!-- ============ TOP BAR (lang) ============ -->
+  <div style="position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:100;display:flex;align-items:center;gap:16px;padding:8px 10px 8px 18px;border-radius:999px;background:rgba(16,19,34,0.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 8px 30px rgba(0,0,0,0.28);border:1px solid rgba(255,255,255,0.08);">
+    <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;color:rgba(255,255,255,0.55);text-transform:uppercase;">Noah Triki</span>
+    <div style="width:1px;height:18px;background:rgba(255,255,255,0.14);"></div>
+    <div style="display:flex;gap:3px;padding:3px;border-radius:999px;background:rgba(255,255,255,0.06);">
+      <button onClick="{{ toFr }}" style="{{ langFrStyle }}">FR</button>
+      <button onClick="{{ toEn }}" style="{{ langEnStyle }}">EN</button>
+    </div>
+  </div>
 
-			<section id="apropos" class="apropos">
-				<div class="content-section">
-					<h2>À propos</h2>
-					<div class="rectangle"></div>
-					<div class="rows">
-						<!-- Informations Perso -->
-						<div class="infos">
-							<h3>Informations</h3>
-							<ul>
-								<li>
-									<strong>Statut</strong>
-									Célibataire
-								</li>
-								<li>
-									<strong>Naissance</strong>
-									11/08/2003
-								</li>
-								<li>
-									<strong>Nationalité</strong>
-									Française
-								</li>
-								<li>
-									<strong>Permis</strong>
-									B
-								</li>
-							</ul>
-							<h3>Contact</h3>
-							<ul>
-								<li>
-									<strong>Email</strong>
-									Voir sur CV
-								</li>
-								<li>
-									<strong>Téléphone</strong>
-									(+33) Voir sur CV
-								</li>
-							</ul>
-						</div>
-						<!-- Interêts -->
-						<div class="infos">
-							<h3>Interêts</h3>
-							<div class="content-interests">
-								<div class="interests">
-									<i id="interests-before-hover" class="fa-regular fa-futbol"></i>
-									<span id="interests-before-hover">Sports</span>
-									<p id="interests-after-hover">
-											Passionné de sport, plus particulièrement de rugby, que je pratique depuis plus de 10 ans.
-									</p>
-									
-								</div>
-								<div class="interests">
-									<i id="interests-before-hover" class="fa-solid fa-headphones"></i>
-									<span id="interests-before-hover">Musique</span>
-									<p id="interests-after-hover">
-											La musique est la base de ma vie, sans elle, tout serait différent.
-									</p>
-								</div>
-								<div class="interests">
-									<i id="interests-before-hover" class="fa-solid fa-plane"></i>
-									<span id="interests-before-hover">Voyager</span>
-									<p id="interests-after-hover">
-											Voyager devient une source d'inspiration et de détente qui me permet aussi de récupérer mon énergie.
-									</p>
-								</div>
-								<div class="interests">
-									<i id="interests-before-hover" class="fas fa-dog"></i>
-									<span id="interests-before-hover">Animaux</span>
-									<p id="interests-after-hover">
-											J'ai été élevé dans un environnement avec des animaux, ce qui m'a permis de les respecter et de les aimer.
-									</p>
-								</div>
-								<div class="interests">
-									<i id="interests-before-hover" class="fas fa-dice-six"></i>
-									<span id="interests-before-hover">Jeux</span>
-									<p id="interests-after-hover">
-											Les jeux me permettent de socialiser avec mes amis et de développer mon cerveau, mes préférés sont les jeux de réflexion (échecs).
-									</p>
-								</div>
-								<div class="interests">
-									<i id="interests-before-hover" class="fas fa-hamburger"></i>
-									<span id="interests-before-hover">Cuisine</span>
-									<p id="interests-after-hover">
-											J'aime la cuisine parce qu'elle me permet de développer toute ma créativité et en raison de la grande variété de combinaisons que l'on peut faire avec les aliments.
-									</p>
-								</div>
-								<div class="interests">
-									<i id="interests-before-hover" class="fa-solid fa-money-bill"></i>
-									<span id="interests-before-hover">Finance</span>
-									<p id="interests-after-hover">
-											Le monde des affaires et de la finance a toujours été ma passion, c'est pourquoi j'y consacre une partie de mon temps libre.
-									</p>
-								</div>
-								<div class="interests">
-									<i id="interests-before-hover" class="fa-solid fa-database"></i>
-									<span id="interests-before-hover">BDD</span>
-									<p id="interests-after-hover">
-											Le monde des bases de données est si vaste que je découvre toujours de nouvelles choses, j'aimerais beaucoup m'y consacrer à l'avenir.
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
+  <!-- ============ MOBILE BACKDROP ============ -->
+  <div onClick="{{ hideNav }}" style="{{ backdropStyle }}"></div>
 
-		<!-- CV -->
-		<!--
-			<div class="background">
-				<section id="cv" class="cv">
-					<div class="content-section">
-						<h2>CV</h2>
-						<div class="rows">
-							<div class="col left">
-								<h3>Formations</h3>
-								<div class="item l">
-									<h4>Baccalauréat (Sciences)</h4>
-									<span class="centre">IES José Saramago(Madrid,Espagne)</span>
-									<span class="dates">2019 - 2021</span>
-									<p>2 ans d'études pour obtenir mon diplôme avec une moyenne de 7,53/10.</p>
-									<div class="connectorl">
-										<div class="cerclel"></div>
-									</div>
-								</div>
-								<div class="item l">
-									<h4>BUT INFO (Parcours D)</h4>
-									<span class="centre">IUT Annecy(74)</span>
-									<span class="dates">2021 - 2024</span>
-									<p>3 ans d'études effectués dans le parcours D (management de Projet) où j'ai aquis toutes mes connaisances à propos de l'informatique.</p>
-									<div class="connectorl">
-										<div class="cerclel"></div>
-									</div>
-								</div>		
-							</div>
-							<div class="col right">
-								<h3>Expériences Professionnelles</h3>
-								<div class="item r">
-									<h4>Aide informatique personnes âgées</h4>
-									<span class="centre">Mairie de Majadahonda(Madrid, Espagne)</span>
-									<span class="dates">2020</span>
-									<p>Projet d'une durée de 3 mois visant à aider les personnes âgées et les débutants tous les jeudis à se familiariser avec l'informatique.</p>
-									<div class="connectorr">
-										<div class="cercler"></div>
-									</div>
-								</div>
-								<div class="item r">
-									<h4>Joueur de rugby</h4>
-									<span class="centre">US Annecy Rugby (espoirs)</span>
-									<span class="dates">2022/-</span>
-									<p>Après avoir joué 8 ans en Espagne, cela m'a donné assez d'expérience pour rejoindre l'équipe U23 en tant que numéro 10 de l'US Annecy, qui joue actuellement en fédérale 1.</p>
-									<div class="connectorr">
-										<div class="cercler"></div>
-									</div>
-								</div>	
-							</div>
-						</div>
-					</div>
-				</section>
-			</div>
-			-->
-		<!-- Parcours -->
-		<div class="background">
-			<div class="parcours" id="parcours">
-				<div class="content-section">
-					<h2>Parcours</h2>
-					<div class="rectangle"></div>
-					<div class="tabs">
-						<div class="tabs-head">
-							<h3 class="tabs-toggle">Formations</h3>
-							<h3 class="tabs-toggle">Expériences</h3>
-						</div>
-						<div class="tabs-body">
-							<div class="tabs-content">
-								<div class="content-section">
-									<div class="photo-parcours">
-										<a href="https://iae.umontpellier.fr/" target="_blank"><img src="data:image/jpeg;base64,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"></a>
-									</div>
-									<div class="description">
-										<h4>UM - IAE Montpellier</h4>
-										<h5>Master CMSI / Montpellier, France</h5>
-										<p>2 ans d'études effectués dans le parcours Consulting & Management des Systèmes d'Information.</p>
-									</div>
-									<div class="rectangle-div"></div>
-									<div class="dates">
-										<h3>202
-											2024 - 2026</h3>
-									</div>
-								</div>
-								<div class="content-section">
-									<div class="photo-parcours">
-										<a href="https://www.iut-acy.univ-smb.fr/" target="_blank"><img src="img/IUTAnnecy.png"></a>
-									</div>
-									<div class="description">
-										<h4>USMB - IUT Annecy</h4>
-										<h5>BUT INFO (Parcours D) / Annecy, France</h5>
-										<p>3 ans d'études effectués dans le parcours D (management de Projet).</p>
-									</div>
-									<div class="rectangle-div"></div>
-									<div class="dates">
-										<h3>2021 - 2024</h3>
-									</div>
-								</div>
-								<div class="content-section">
-									<div class="photo-parcours">
-										<a href="https://www.educa2.madrid.org/web/centro.ies.josesaramago.majadahonda" target="_blank"><img src="img/saramago.png"></a>
-									</div>
-									<div class="description">
-										<h4>IES José Saramago</h4>
-										<h5>Baccalauréat (Sciences) /  Madrid, Espagne</h5>
-										<p>2 ans d'études pour obtenir mon diplôme avec une moyenne de 7,53/10.</p>
-									</div>
-									<div class="rectangle-div"></div>
-									<div class="dates">
-										<h3>2019 - 2021</h3>
-									</div>
-								</div>
-							</div>
-							<div class="tabs-content">
-								<div class="content-section">
-									<div class="photo-parcours">
-										<a href="https://staubli.com" target="_blank"><img src="data:image/png;base64,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"></a>
-									</div>
-									<div class="description">
-										<h4>Stäubli</h4>
-										<h5>(Alternance) Chef de projet IT</h5>
-										<p>Mise en place de magasins automatiques, migration Windows 11 et mise à jour du MES</p>
-									</div>
-									<div class="rectangle-div"></div>
-									<div class="dates">
-										<h3>Avr 2023 - Jul 2023</h3>
-									</div>
-								</div>
-								<div class="content-section">
-									<div class="photo-parcours">
-										<a href="https://evian.com/" target="_blank"><img src="data:image/png;base64,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"></a>
-									</div>
-									<div class="description">
-										<h4>Evian</h4>
-										<h5>(Alternance) Développeur IT</h5>
-										<p>Création d'un application web pour enregistrer des visiteurs à l'usine d'Evian.</p>
-									</div>
-									<div class="rectangle-div"></div>
-									<div class="dates">
-										<h3>Sept 2023 - Sept 2024</h3>
-									</div>
-								</div>
-								<div class="content-section">
-									<div class="photo-parcours">
-										<a href="https://www.dsm-firmenich.com/en/home.html" target="_blank"><img src="data:image/jpeg;base64,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"></a>
-									</div>
-									<div class="description">
-										<h4>Firmenich</h4>
-										<h5>(Stage) Développeur IT</h5>
-										<p>Création d'un portail de pentest.</p>
-									</div>
-									<div class="rectangle-div"></div>
-									<div class="dates">
-										<h3>Avr 2023 - Jul 2023</h3>
-									</div>
-								</div>
-								<div class="content-section">
-									<div class="photo-parcours">
-										<a href="https://usannecyrugby.ffr.fr/" target="_blank"><img src="img/usannecy.png"></a>
-									</div>
-									<div class="description">
-										<h4>US Annecy Rugby (espoirs)</h4>
-										<h5>Joueur de rugby</h5>
-										<p>Après avoir joué 8 ans en Espagne, cela m'a donné assez d'expérience pour rejoindre l'équipe U23 en tant que numéro 10 de l'US Annecy, qui joue actuellement en fédérale 1.</p>
-									</div>
-									<div class="rectangle-div"></div>
-									<div class="dates">
-										<h3>2022 - 2024</h3>
-									</div>
-								</div>
-								<div class="content-section">
-									<div class="photo-parcours">
-										<a href="https://www.majadahonda.org/" target="_blank"><img src="img/ayuntamientomajadahonda.png"></a>
-									</div>
-									<div class="description">
-										<h4>Mairie de Majadahonda</h4>
-										<h5>Aide informatique personnes âgées / Madrid, Espagne</h5>
-										<p>Projet d'une durée de 3 mois visant à aider les personnes âgées et les débutants tous les jeudis à se familiariser avec l'informatique.</p>
-									</div>
-									<div class="rectangle-div"></div>
-									<div class="dates">
-										<h3> Mar 2020</h3>
-									</div>
-								</div>
-								
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Skills -->
-			<section id="skills" class="skills">
-				<div class="content-section">
-					<h2>Compétences</h2>
-					<div class="rectangle"></div>
-					<div class="tabs">
-						<div class="tabs-head">
-							<h3 class="tabs-toggle">BDD</h3>
-							<h3 class="tabs-toggle">ERP</h3>
-							<h3 class="tabs-toggle">Développement</h3>
-							<h3 class="tabs-toggle">Langues</h3>
-							<h3 class="tabs-toggle">Autres</h3>
-						</div>
-						<div class="tabs-body">
-							<div class="tabs-content">
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>PostgreSQL</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>pgAdmin4</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>MySQL</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>SQL</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>phpMyAdmin</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>PowerAMC</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-							</div>
+  <!-- ============ EDGE HANDLE (peek) ============ -->
+  <div id="nt-nav-handle" onClick="{{ showNav }}" style="{{ handleStyle }}">
+    <span style="width:5px;height:5px;border-radius:50%;background:#4338CA;"></span>
+    <span style="width:5px;height:5px;border-radius:50%;background:#4338CA;"></span>
+    <span style="width:5px;height:5px;border-radius:50%;background:#4338CA;"></span>
+  </div>
 
-							<div class="tabs-content">
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>SAP ERP</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>Odoo</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Avancé</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>Microsoft Power BI</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Avancé</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>Cimag</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>MES</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-							</div>
+  <!-- ============ FLOATING SIDE MENU (overlay) ============ -->
+  <nav id="nt-nav" style="{{ navContainerStyle }}">
+    <div style="display:flex;align-items:center;gap:10px;padding:6px 12px 10px;">
+      <span style="width:6px;height:6px;border-radius:50%;background:#4338CA;"></span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#9499AE;">Navigation</span>
+    </div>
+    <div style="height:1px;background:rgba(30,35,64,0.10);margin:0 8px 6px;"></div>
+    <sc-for list="{{ navItems }}" as="it" hint-placeholder-count="5">
+      <button onClick="{{ it.go }}" style="{{ it.rowStyle }}" style-hover="background:rgba(30,35,64,0.05);">
+        <span style="{{ it.numStyle }}">{{ it.num }}</span>
+        <span style="{{ navLabelStyle }}">{{ it.label }}</span>
+      </button>
+    </sc-for>
+  </nav>
 
-							<div class="tabs-content">
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>HTML5</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Avancé</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>CSS</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Avancé</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>JavaScript</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>Bootstrap</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>Tailwind CSS</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>React.js</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>Adonis.js</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>Django</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>GitHub</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>PHP</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>Python</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Basique</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>C#</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-							</div>
-							<div class="tabs-content">
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>Français</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Langue maternelle</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>Espagnol</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Bilingue</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>Anglais</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p href="https://www.service-public.fr/particuliers/vosdroits/F34739">Avancé - B2</p>
-										
-									</div>
-								</div>
-							</div>
-							<div class="tabs-content">
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>Multilingue</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Avancé</p>
-									</div>
-								</div>
-							</div>
-							<div class="tabs-content">
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>Microsoft Excel</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>Microsoft Office</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>Microsoft Power BI</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>Microsoft Project</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>Trello</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>Gestion de projet</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>Planification de projet</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>Direction de projets informatiques</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>Gestion de projets des systemes d'information</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>Gestion de projets et programmes informatiques</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>Decouverte de connaissances</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-								<div class="content-skill">
-									<div class="circle-anim"></div>
-									<h3>Education progressive</h3>
-									<div class="content">
-										<h4>Niveau</h4>
-										<p>Intermediaire</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-					</div>
-				</div>
-			</section>
+  <!-- ============ CONTENT ============ -->
+  <div style="position:relative;z-index:1;">
 
-		<!-- Portfolio -->
-			<div class="background">
-				<section id="portfolio" class="portfolio">
-					<div class="content-section">
-						<h2>Portfolio</h2>
-						<div class="rectangle"></div>
-						<div class="rows">
-							<div class="card">
-								<div class="image-proj">
-									<img src="img/clubmed.png">
-								</div>
-								<div class="infos">
-									<a href="http://51.83.36.122/5962" target="_blank"><h3>ClubMed</h3></a>
-									<p>Projet universitaire dans lequel j'étais chargé de créer et de gérer la base de données, analyser les besoins clients et gérer les politiques RGPD de clubMed(Entreprise de voyages) avec 4 collègues.</p>
-								</div>
-							</div>
-							<div class="card">
-								<div class="image-proj">
-									<img src="img/todonaturaleza.PNG">
-								</div>
-								<div class="infos">
-									<a href="http://todonaturaleza.com" target="_blank"><h3>TodoNaturaleza</h3></a>
-									<p>Projet personnel, création de page web avec WordPress à propos des plantes. Fait avec mon frére. </p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-			</div>
-		<!-- Footer -->
-		<footer>
-			<div class="content-section">
-				<h2> &copy Noah Triki 2022</h2>
-			</div>
-		</footer>
-		</div>
+    <!-- HERO -->
+    <section id="hero" data-screen-label="Hero" data-reveal-group style="max-width:1080px;margin:0 auto;padding:clamp(116px,18vw,150px) clamp(20px,5vw,40px) 60px;display:flex;flex-wrap:wrap;gap:clamp(36px,5vw,72px);align-items:center;">
+      <div style="flex:1 1 360px;min-width:0;">
+        <div data-reveal style="display:inline-flex;align-items:center;gap:9px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.08em;color:#4338CA;text-transform:uppercase;">
+          <span style="width:7px;height:7px;border-radius:50%;background:#4338CA;animation:ntPulse 2.4s ease-out infinite;"></span>{{ t.available }}
+        </div>
+        <h1 data-reveal style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(58px,8vw,108px);line-height:0.9;letter-spacing:-0.035em;margin:22px 0 0;color:#1E2340;">Noah<br><span style="color:#4338CA;">Triki</span></h1>
+        <div data-reveal style="font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:0.05em;color:#5B6079;margin-top:22px;text-transform:uppercase;">{{ t.role }}</div>
+        <p data-reveal style="font-size:18px;line-height:1.62;color:#4A4F6B;max-width:460px;margin:24px 0 32px;">{{ t.tagline }}</p>
+        <div data-reveal style="display:flex;align-items:center;gap:22px;flex-wrap:wrap;">
+          <span data-magnetic style="display:inline-block;transition:transform .25s cubic-bezier(.2,.7,.2,1);">
+            <a href="https://www.linkedin.com/in/noah-triki/" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:#1E2340;color:#fff;padding:14px 26px;border-radius:8px;font-weight:600;font-size:15px;transition:all 0.22s;" style-hover="background:#4338CA;transform:translateY(-3px);box-shadow:0 14px 28px rgba(67,56,202,0.28);">{{ t.cta }} <span style="font-family:'JetBrains Mono',monospace;">→</span></a>
+          </span>
+          <span style="display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:13px;color:#5B6079;"><span style="width:5px;height:5px;border-radius:50%;background:#4338CA;"></span>{{ t.location }}</span>
+        </div>
+      </div>
+      <div data-reveal="scale" style="flex:1 1 260px;max-width:360px;width:100%;position:relative;aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:repeating-linear-gradient(135deg,#EEEDE6,#EEEDE6 11px,#F4F3EC 11px,#F4F3EC 22px);border:1px solid rgba(30,35,64,0.12);display:flex;align-items:center;justify-content:center;animation:ntFloatY 7s ease-in-out infinite;">
+        <span style="font-family:'Bricolage Grotesque',sans-serif;font-size:150px;font-weight:800;color:rgba(67,56,202,0.16);letter-spacing:-0.04em;">NT</span>
+        <span style="position:absolute;bottom:15px;left:16px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B7088;letter-spacing:0.08em;">[ PORTRAIT ]</span>
+      </div>
+    </section>
 
+    <!-- MARQUEE -->
+    <div style="overflow:hidden;border-top:1px solid rgba(30,35,64,0.12);border-bottom:1px solid rgba(30,35,64,0.12);padding:16px 0;margin:24px 0 20px;">
+      <div style="display:flex;width:max-content;animation:ntMarquee 30s linear infinite;" style-hover="animation-play-state:paused;">
+        <div style="display:flex;align-items:center;">
+          <sc-for list="{{ marquee }}" as="m" hint-placeholder-count="8">
+            <span style="display:inline-flex;align-items:center;gap:34px;font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(18px,3.5vw,24px);color:#1E2340;padding:0 clamp(20px,4vw,34px);">{{ m }}<span style="width:6px;height:6px;border-radius:50%;background:#4338CA;display:inline-block;"></span></span>
+          </sc-for>
+        </div>
+        <div style="display:flex;align-items:center;" aria-hidden="true">
+          <sc-for list="{{ marquee }}" as="m" hint-placeholder-count="8">
+            <span style="display:inline-flex;align-items:center;gap:34px;font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(18px,3.5vw,24px);color:#1E2340;padding:0 clamp(20px,4vw,34px);">{{ m }}<span style="width:6px;height:6px;border-radius:50%;background:#4338CA;display:inline-block;"></span></span>
+          </sc-for>
+        </div>
+      </div>
+    </div>
 
-		<!-- Contact -->
-		<div class="popup" id="popup">
-			<div id="contact" class="contact">
-				<form method="post" class="form" id="form">
-				<a onclick="toggle()"><i class="fa-solid fa-xmark"></i></a>
-				<h2>Envoyez moi un <span>message</span> !</h2>
-					<!-- GROUPE NOM-->
-					<div class="form-group" id="group-surname">
-						<label for="surname" class="form-label">Nom *</label>
-						<div class="form-group-input">
-							<input type="text" class="form-input" name="surname" id="surname">
-							<i class="form-validate-state fa fa-times-circle"></i>
-						</div>
-						<p class="form-input-error">Le nom ne peut que contenir des espaces et des lettres.</p>
-					</div>
+    <!-- PARCOURS -->
+    <section id="parcours" data-screen-label="Parcours" style="max-width:1080px;margin:0 auto;padding:60px clamp(20px,5vw,40px);">
+      <div style="display:flex;align-items:baseline;gap:18px;border-bottom:1px solid rgba(30,35,64,0.14);padding-bottom:20px;margin-bottom:52px;">
+        <span data-reveal style="font-family:'JetBrains Mono',monospace;font-size:14px;color:#4338CA;">01</span>
+        <h2 data-reveal style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(34px,4.4vw,48px);margin:0;letter-spacing:-0.02em;">{{ t.career }}</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(28px,4vw,48px);">
+        <div data-reveal-group>
+          <h3 data-reveal style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#4338CA;margin:0 0 18px;">{{ t.formations }}</h3>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <sc-for list="{{ formations }}" as="f" hint-placeholder-count="3">
+              <div data-reveal style="background:#fff;border:1px solid rgba(30,35,64,0.10);border-radius:12px;padding:20px 22px;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s,border-color .3s;" style-hover="transform:translateY(-4px);border-color:#4338CA;box-shadow:0 16px 38px rgba(30,35,64,0.10);">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B7088;letter-spacing:0.04em;margin-bottom:10px;">{{ f.period }}</div>
+                <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:20px;margin:0 0 2px;color:#1E2340;letter-spacing:-0.01em;">{{ f.title }}</h4>
+                <div style="font-size:13px;font-weight:600;color:#4338CA;margin-bottom:6px;">{{ f.org }}</div>
+                <div style="display:flex;align-items:center;gap:7px;margin-bottom:10px;">
+                  <span style="width:5px;height:5px;border-radius:50%;background:#9499AE;"></span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8A8FA6;">{{ f.place }}</span>
+                </div>
+                <p style="font-size:13.5px;line-height:1.55;color:#5B6079;margin:0;">{{ f.desc }}</p>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div data-reveal-group>
+          <h3 data-reveal style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#4338CA;margin:0 0 18px;">{{ t.experiences }}</h3>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <sc-for list="{{ experiences }}" as="f" hint-placeholder-count="5">
+              <div data-reveal style="background:#fff;border:1px solid rgba(30,35,64,0.10);border-radius:12px;padding:20px 22px;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s,border-color .3s;" style-hover="transform:translateY(-4px);border-color:#4338CA;box-shadow:0 16px 38px rgba(30,35,64,0.10);">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px;">
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B7088;letter-spacing:0.04em;">{{ f.period }}</span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:#4338CA;background:rgba(67,56,202,0.08);border:1px solid rgba(67,56,202,0.18);padding:4px 10px;border-radius:999px;white-space:nowrap;">{{ f.contract }}</span>
+                </div>
+                <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:20px;margin:0 0 2px;color:#1E2340;letter-spacing:-0.01em;">{{ f.title }}</h4>
+                <div style="font-size:13px;font-weight:600;color:#4338CA;margin-bottom:6px;">{{ f.org }}</div>
+                <div style="display:flex;align-items:center;gap:7px;margin-bottom:10px;">
+                  <span style="width:5px;height:5px;border-radius:50%;background:#9499AE;"></span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8A8FA6;">{{ f.place }}</span>
+                </div>
+                <p style="font-size:13.5px;line-height:1.55;color:#5B6079;margin:0;">{{ f.desc }}</p>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </section>
 
-					<!-- GROUPE PRENOM -->
-					<div class="form-group" id="group-name">
-						<label for="name" class="form-label">Prénom *</label>
-						<div class="form-group-input">
-							<input type="text" class="form-input" name="name" id="name">
-							<i class="form-validate-state fa fa-times-circle"></i>
-						</div>
-						<p class="form-input-error">Le prénom ne peut que contenir des espaces et des lettres.</p>
-					</div>
+    <!-- COMPÉTENCES -->
+    <section id="competences" data-screen-label="Compétences" style="max-width:1080px;margin:0 auto;padding:60px clamp(20px,5vw,40px);">
+      <div style="display:flex;align-items:baseline;gap:18px;border-bottom:1px solid rgba(30,35,64,0.14);padding-bottom:20px;margin-bottom:14px;">
+        <span data-reveal style="font-family:'JetBrains Mono',monospace;font-size:14px;color:#4338CA;">02</span>
+        <h2 data-reveal style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(34px,4.4vw,48px);margin:0;letter-spacing:-0.02em;">{{ t.skills }}</h2>
+      </div>
+      <sc-for list="{{ skillGroups }}" as="g" hint-placeholder-count="5">
+        <div data-reveal-group style="display:flex;flex-wrap:wrap;gap:clamp(10px,2.5vw,32px);padding:30px 0;border-top:1px solid rgba(30,35,64,0.10);align-items:flex-start;">
+          <h3 data-reveal style="flex:0 0 200px;font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:20px;margin:0;color:#1E2340;letter-spacing:-0.01em;">{{ g.label }}</h3>
+          <div style="flex:1 1 280px;display:flex;flex-wrap:wrap;gap:10px;">
+            <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="5">
+              <span data-reveal style="font-size:13.5px;font-weight:500;color:#3A3F5C;background:#fff;border:1px solid rgba(30,35,64,0.13);padding:8px 15px;border-radius:999px;cursor:default;transition:transform .25s cubic-bezier(.2,.7,.2,1),background .25s,color .25s,border-color .25s,box-shadow .25s;" style-hover="transform:translateY(-4px) scale(1.06);border-color:#4338CA;color:#fff;background:#4338CA;box-shadow:0 10px 22px rgba(67,56,202,0.30);">{{ it }}</span>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </section>
 
-					<!-- GROUPE ENTREPRISE  -->
-					<div class="form-group" id="group-company">
-						<label for="company" class="form-label">Entreprise</label>
-						<div class="form-group-input">
-							<input type="text" class="form-input" name="company" id="company">
-							<i class="form-validate-state fa fa-times-circle"></i>
-						</div>
-						<p class="form-input-error">Le prénom ne peut que contenir des espaces et des lettres.</p>
-					</div>
+    <!-- PORTFOLIO -->
+    <section id="projets" data-screen-label="Projets" style="max-width:1080px;margin:0 auto;padding:60px clamp(20px,5vw,40px);">
+      <div style="display:flex;align-items:baseline;gap:18px;border-bottom:1px solid rgba(30,35,64,0.14);padding-bottom:20px;margin-bottom:44px;">
+        <span data-reveal style="font-family:'JetBrains Mono',monospace;font-size:14px;color:#4338CA;">03</span>
+        <h2 data-reveal style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(34px,4.4vw,48px);margin:0;letter-spacing:-0.02em;">{{ t.work }}</h2>
+      </div>
+      <div data-reveal-group style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;">
+        <sc-for list="{{ projects }}" as="p" hint-placeholder-count="2">
+          <a href="{{ p.href }}" target="_blank" data-reveal style="display:block;padding:32px;border:1px solid rgba(30,35,64,0.13);border-radius:14px;background:#fff;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s,border-color .3s;" style-hover="border-color:#4338CA;transform:translateY(-6px);box-shadow:0 22px 48px rgba(30,35,64,0.12);">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#4338CA;margin-bottom:18px;">{{ p.tag }}</div>
+            <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:27px;margin:0 0 12px;color:#1E2340;letter-spacing:-0.015em;">{{ p.name }}</h3>
+            <p style="font-size:14.5px;line-height:1.6;color:#5B6079;margin:0 0 22px;">{{ p.desc }}</p>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#1E2340;">{{ t.view }} →</div>
+          </a>
+        </sc-for>
+      </div>
+    </section>
 
-					<!-- GROUPE TELEPHONE -->
-					<div class="form-group" id="group-tel">
-						<label for="tel" class="form-label">Téléphone *</label>
-						<div class="form-group-input">
-							<input type="tel" class="form-input" name="tel" id="tel">
-							<i class="form-validate-state fa fa-times-circle"></i>
-						</div>
-						<p class="form-input-error">Le numéro ne peut que contenir 10 chiffres, merci de mettre le 0 au début</p>
-					</div>
+    <!-- FOOTER -->
+    <section id="contact" data-screen-label="Contact" style="max-width:1080px;margin:0 auto;padding:90px clamp(20px,5vw,40px) 130px;text-align:center;">
+      <div data-reveal-group>
+        <h2 data-reveal style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(36px,5vw,58px);letter-spacing:-0.025em;margin:0 0 16px;color:#1E2340;line-height:1.0;">{{ t.footerTitle }}</h2>
+        <p data-reveal style="font-size:17px;line-height:1.6;color:#5B6079;max-width:500px;margin:0 auto 34px;">{{ t.footerSub }}</p>
+        <span data-reveal data-magnetic style="display:inline-block;transition:transform .25s cubic-bezier(.2,.7,.2,1);">
+          <a href="https://www.linkedin.com/in/noah-triki/" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:#1E2340;color:#fff;padding:16px 30px;border-radius:8px;font-weight:600;font-size:16px;transition:all 0.22s;" style-hover="background:#4338CA;transform:translateY(-3px);box-shadow:0 14px 28px rgba(67,56,202,0.28);">{{ t.cta }} <span style="font-family:'JetBrains Mono',monospace;">→</span></a>
+        </span>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9499AE;margin-top:54px;">© 2026 — Noah Triki</div>
+      </div>
+    </section>
 
-					<!-- GROUPE EMAIL -->
-					<div class="form-group form-group-email" id="group-email">
-						<label for="email" class="form-label">Email *</label>
-						<div class="form-group-input">
-							<input type="email" class="form-input" name="email" id="email">
-							<i class="form-validate-state fa fa-times-circle"></i>
-						</div>
-						<p class="form-input-error">l'email ne peut contenir que des lettres, des chiffres, des points, des tirets et des tirets du bas.</p>
-					</div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { lang: 'fr', navVisible: false, active: 'hero', w: (typeof window !== 'undefined' ? window.innerWidth : 1280) };
 
-					<!-- GROUPE TEXT -->
-					<div class="form-group form-group-msgtxt" id="group-msgtxt">
-						<label for="msgtxt" class="form-label">Message</label>
-						<div class="form-group-input">
-							<textarea class="form-input comments" name="msgtxt" id="msgtxt"></textarea>
-							<i class="form-validate-state fa fa-times-circle"></i>
-						</div>
-						<p class="form-input-error">Le message ne peut que faire 300 caractères</p>
-					</div>
+  componentDidMount() {
+    this.io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) this.reveal(e.target); });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-					
+    this._onScroll = () => {
+      const h = document.documentElement;
+      const max = (h.scrollHeight - h.clientHeight) || 1;
+      const p = Math.min(1, Math.max(0, h.scrollTop / max));
+      const bar = document.getElementById('nt-progress');
+      if (bar) bar.style.transform = 'scaleX(' + p + ')';
+      const vh = window.innerHeight || 800;
+      document.querySelectorAll('[data-reveal]').forEach((n) => {
+        if (n.__done) return;
+        if (n.getBoundingClientRect().top < vh * 0.92) this.reveal(n);
+      });
+      this.spy();
+    };
 
-					<!-- MESSAGE ERROR -->
-					<div class="form-message" id="form-message">
-						<p><i class="fa fa-exclamation-circle"></i><b>Error :</b> Completez correctement le formulaire s'il vous plaît.</p>
-					</div>
+    this._onMove = (ev) => {
+      if (this._raf) return;
+      this._raf = requestAnimationFrame(() => {
+        this._raf = null;
+        document.querySelectorAll('[data-magnetic]').forEach((el) => {
+          const r = el.getBoundingClientRect();
+          const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+          const dx = ev.clientX - cx, dy = ev.clientY - cy;
+          const dist = Math.hypot(dx, dy);
+          if (dist < 140) { el.style.transform = 'translate(' + (dx * 0.28) + 'px,' + (dy * 0.40) + 'px)'; }
+          else if (el.style.transform) { el.style.transform = ''; }
+        });
+        // reveal the floating menu when the pointer nears the left edge
+        const nearLeft = ev.clientX < 96;
+        let keep = false;
+        if (this.state.navVisible) {
+          const navEl = document.getElementById('nt-nav');
+          if (navEl) {
+            const r = navEl.getBoundingClientRect();
+            keep = ev.clientX < r.right + 56 && ev.clientY > r.top - 60 && ev.clientY < r.bottom + 60;
+          }
+        }
+        const vis = nearLeft || keep;
+        if (vis !== this.state.navVisible) this.setState({ navVisible: vis });
+      });
+    };
 
-					<!-- GROUPE ENVOYER -->
-					<div class="form-group form-group-send-btn">
-						<button type="submit" class="form-btn">Créer</button>
-					</div>
+    this._onResize = () => { if (window.innerWidth !== this.state.w) this.setState({ w: window.innerWidth }); };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    window.addEventListener('mousemove', this._onMove, { passive: true });
+    window.addEventListener('resize', this._onResize, { passive: true });
+    this.scan();
+    this.spy();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._onScroll);
+    window.removeEventListener('mousemove', this._onMove);
+    window.removeEventListener('resize', this._onResize);
+    if (this.io) this.io.disconnect();
+  }
+  componentDidUpdate() { this.scan(); }
 
+  spy() {
+    const ids = ['hero', 'parcours', 'competences', 'projets', 'contact'];
+    let cur = ids[0];
+    for (const id of ids) {
+      const el = document.getElementById(id);
+      if (!el) continue;
+      const r = el.getBoundingClientRect();
+      if (r.top <= 160) cur = id;
+    }
+    const h = document.documentElement;
+    if (h.scrollTop + h.clientHeight >= h.scrollHeight - 4) cur = ids[ids.length - 1];
+    if (cur !== this.state.active) this.setState({ active: cur });
+  }
+  goTo(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const y = window.scrollY + el.getBoundingClientRect().top - 24;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+    if ((this.state.w || 1280) < 1040) this.setState({ navVisible: false });
+  }
 
-				</form>
-			</div>
-		</div>
-		
+  reveal(n) {
+    if (n.__done) return;
+    n.__done = true;
+    n.style.opacity = '1';
+    n.style.transform = 'none';
+    if (this.io) this.io.unobserve(n);
+  }
+  scan() {
+    requestAnimationFrame(() => {
+      const vh = window.innerHeight || 800;
+      document.querySelectorAll('[data-reveal]').forEach((n) => {
+        if (n.__seen) return;
+        n.__seen = true;
+        const type = n.getAttribute('data-reveal') || 'up';
+        n.style.opacity = '0';
+        n.style.transition = 'opacity .8s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1)';
+        n.style.transform = (type === 'scale') ? 'scale(.92)' : 'translateY(28px)';
+        const grp = n.closest('[data-reveal-group]');
+        if (grp) {
+          const sibs = Array.prototype.slice.call(grp.querySelectorAll('[data-reveal]'));
+          const i = sibs.indexOf(n);
+          if (i > 0) n.style.transitionDelay = (i * 70) + 'ms';
+        }
+        const top = n.getBoundingClientRect().top;
+        if (top < vh * 0.92) { requestAnimationFrame(() => this.reveal(n)); }
+        else if (this.io) { this.io.observe(n); }
+        else { this.reveal(n); }
+      });
+      clearTimeout(this._fallback);
+      this._fallback = setTimeout(() => {
+        document.querySelectorAll('[data-reveal]').forEach((n) => { if (!n.__done) this.reveal(n); });
+      }, 1600);
+    });
+  }
 
+  renderVals() {
+    const lang = this.state.lang;
+    const vis = this.state.navVisible;
+    const active = this.state.active;
+    const isMobile = (this.state.w || 1280) < 1040;
+    const L = (v) => (v && typeof v === 'object' && v.fr !== undefined) ? v[lang] : v;
 
+    const STR = {
+      fr: {
+        role: 'Chef de Projet IT',
+        available: 'En alternance · Stäubli depuis 2024',
+        tagline: 'Master CMSI — pilotage de projets SI, ERP & bases de données, à la croisée du métier et de la technique.',
+        location: 'Annecy, France',
+        career: 'Parcours', formations: 'Formations', experiences: 'Expériences',
+        skills: 'Compétences', work: 'Projets',
+        footerTitle: 'Construisons le prochain projet ensemble.',
+        footerSub: 'Actuellement en alternance chez Stäubli. Toujours partant pour échanger autour de la gestion de projet IT.',
+        cta: 'Me contacter', view: 'Voir le projet',
+        nav: { hero: 'Accueil', parcours: 'Parcours', competences: 'Compétences', projets: 'Projets', contact: 'Contact' }
+      },
+      en: {
+        role: 'IT Project Manager',
+        available: 'Apprentice · Stäubli since 2024',
+        tagline: 'CMSI Master\u2019s — leading IS, ERP & database projects, bridging the gap between business and technology.',
+        location: 'Annecy, France',
+        career: 'Background', formations: 'Education', experiences: 'Experience',
+        skills: 'Skills', work: 'Work',
+        footerTitle: 'Let\u2019s build the next project together.',
+        footerSub: 'Currently doing my apprenticeship at Stäubli. Always happy to talk IT project management.',
+        cta: 'Get in touch', view: 'View project',
+        nav: { hero: 'Home', parcours: 'Background', competences: 'Skills', projets: 'Work', contact: 'Contact' }
+      }
+    };
 
-		<script defer src="js/script.js"></script>
+    const RAW_FORM = [
+      { org: 'IAE Montpellier — UM', period: '2024 — 2026', place: 'Montpellier, France',
+        title: { fr: 'Master CMSI', en: 'CMSI Master\u2019s' },
+        desc: { fr: 'Consulting & Management des Systèmes d\u2019Information.', en: 'Consulting & Information Systems Management.' } },
+      { org: 'IUT Annecy — USMB', period: '2021 — 2024', place: 'Annecy, France',
+        title: { fr: 'BUT Informatique', en: 'BUT Computer Science' },
+        desc: { fr: 'Parcours D — Management de projet informatique.', en: 'Track D — IT project management.' } },
+      { org: 'IES José Saramago', period: '2019 — 2021', place: 'Madrid, Espagne',
+        title: { fr: 'Baccalauréat Scientifique', en: 'Science Baccalaureate' },
+        desc: { fr: 'Diplôme obtenu avec mention.', en: 'Graduated with honours.' } }
+    ];
+
+    const RAW_EXP = [
+      { org: 'Stäubli', period: { fr: '2024 — aujourd\u2019hui', en: '2024 — present' },
+        contract: { fr: 'Alternance', en: 'Apprenticeship' }, place: 'Faverges, France',
+        title: { fr: 'Chef de projet IT', en: 'IT Project Manager' },
+        desc: { fr: 'Magasins automatiques, migration Windows 11 et mise à jour du MES.', en: 'Automated storage systems, Windows 11 migration and MES upgrade.' } },
+      { org: 'Evian — Danone', period: '2023 — 2024',
+        contract: { fr: 'Stage', en: 'Internship' }, place: 'Évian-les-Bains, France',
+        title: { fr: 'Développeur IT', en: 'IT Developer' },
+        desc: { fr: 'Application web d\u2019enregistrement des visiteurs de l\u2019usine.', en: 'Web application for plant visitor registration.' } },
+      { org: 'Firmenich', period: '2023',
+        contract: { fr: 'Stage', en: 'Internship' }, place: { fr: 'Genève, Suisse', en: 'Geneva, Switzerland' },
+        title: { fr: 'Développeur IT', en: 'IT Developer' },
+        desc: { fr: 'Conception d\u2019un portail de pentest interne.', en: 'Built an internal pentest portal.' } },
+      { org: 'US Annecy Rugby', period: '2022 — 2024',
+        contract: { fr: 'Sport — Espoirs', en: 'Sport — U23' }, place: 'Annecy, France',
+        title: { fr: 'Demi d\u2019ouverture', en: 'Fly-half' },
+        desc: { fr: 'Compétition en Fédérale 1 après 8 ans de pratique.', en: 'Competing in Fédérale 1 after 8 years of practice.' } },
+      { org: 'Mairie de Majadahonda', period: '2020',
+        contract: { fr: 'Bénévolat', en: 'Volunteering' }, place: { fr: 'Madrid, Espagne', en: 'Madrid, Spain' },
+        title: { fr: 'Médiation numérique', en: 'Digital mediation' },
+        desc: { fr: 'Initiation à l\u2019informatique pour les seniors.', en: 'IT literacy program for seniors.' } }
+    ];
+
+    const RAW_SKILLS = [
+      { label: { fr: 'Bases de données', en: 'Databases' }, items: ['PostgreSQL', 'MySQL', 'SQL', 'pgAdmin 4', 'phpMyAdmin', 'PowerAMC'] },
+      { label: { fr: 'ERP & Business Intelligence', en: 'ERP & Business Intelligence' }, items: ['SAP ERP', 'Odoo', 'Power BI', 'MES', 'Cimag'] },
+      { label: { fr: 'Développement', en: 'Development' }, items: ['JavaScript', 'React.js', 'Adonis.js', 'Django', 'PHP', 'Python', 'C#', 'HTML5', 'CSS', 'Tailwind', 'Bootstrap', 'Git'] },
+      { label: { fr: 'Gestion de projet', en: 'Project management' }, items: [{ fr: 'MS Project', en: 'MS Project' }, 'Trello', { fr: 'Planification SI', en: 'IS planning' }, { fr: 'Pilotage', en: 'Steering' }, 'Excel'] },
+      { label: { fr: 'Langues', en: 'Languages' }, items: [{ fr: 'Français — natif', en: 'French — native' }, { fr: 'Español — bilingue', en: 'Spanish — bilingual' }, { fr: 'English — B2', en: 'English — B2' }] }
+    ];
+
+    const RAW_PROJ = [
+      { name: 'ClubMed', href: 'http://51.83.36.122/5962',
+        tag: { fr: 'Base de données · RGPD', en: 'Database · GDPR' },
+        desc: { fr: 'Conception et gestion de la base de données, analyse des besoins clients et conformité RGPD — projet universitaire en équipe de 5.', en: 'Database design and management, client needs analysis and GDPR compliance — university project, team of 5.' } },
+      { name: 'TodoNaturaleza', href: 'http://todonaturaleza.com',
+        tag: { fr: 'Web · WordPress', en: 'Web · WordPress' },
+        desc: { fr: 'Site WordPress dédié aux plantes, conçu en duo — projet personnel.', en: 'WordPress site dedicated to plants, built as a duo — personal project.' } }
+    ];
+
+    const marquee = ['PostgreSQL', 'SAP ERP', 'Power BI', 'React.js', 'Python', 'Django', 'MES', 'Odoo', 'MS Project', 'SQL', 'C#', 'Git'];
+
+    const formations = RAW_FORM.map((x) => ({ org: x.org, period: L(x.period), title: L(x.title), desc: L(x.desc), place: L(x.place) }));
+    const experiences = RAW_EXP.map((x) => ({ org: x.org, period: L(x.period), contract: L(x.contract), place: L(x.place), title: L(x.title), desc: L(x.desc) }));
+    const skillGroups = RAW_SKILLS.map((g) => ({ label: L(g.label), items: g.items.map(L) }));
+    const projects = RAW_PROJ.map((p) => ({ name: p.name, href: p.href, tag: L(p.tag), desc: L(p.desc) }));
+
+    // ---- nav (edge-reveal overlay) ----
+    const navLabelStyle = {
+      fontFamily: "'Hanken Grotesk', sans-serif", fontSize: '13.5px', fontWeight: 500,
+      whiteSpace: 'nowrap'
+    };
+    const SECTIONS = [
+      { id: 'hero', num: '01' }, { id: 'parcours', num: '02' }, { id: 'competences', num: '03' },
+      { id: 'projets', num: '04' }, { id: 'contact', num: '05' }
+    ];
+    const navItems = SECTIONS.map((s, idx) => {
+      const on = active === s.id;
+      return {
+        num: s.num, label: STR[lang].nav[s.id],
+        go: () => this.goTo(s.id),
+        rowStyle: {
+          display: 'flex', alignItems: 'center', gap: '12px', padding: '9px 12px',
+          borderRadius: '10px', cursor: 'pointer', border: 'none', width: '100%',
+          textAlign: 'left', font: 'inherit',
+          background: on ? 'rgba(67,56,202,0.10)' : 'transparent',
+          color: on ? '#4338CA' : '#5B6079',
+          opacity: vis ? 1 : 0,
+          transform: vis ? 'translateX(0)' : 'translateX(-16px)',
+          transition: 'background .22s, color .22s, opacity .4s ease, transform .5s cubic-bezier(.2,.8,.2,1)',
+          transitionDelay: vis ? (0.05 + idx * 0.05) + 's' : '0s'
+        },
+        numStyle: {
+          fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', flexShrink: 0,
+          width: '18px', textAlign: 'center', color: on ? '#4338CA' : '#9499AE'
+        }
+      };
+    });
+
+    const navContainerStyle = {
+      position: 'fixed', left: '18px', top: '50%', zIndex: 90,
+      display: 'flex', flexDirection: 'column', gap: '3px', padding: '10px',
+      borderRadius: '18px', background: 'rgba(255,255,255,0.82)',
+      backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)',
+      border: '1px solid rgba(30,35,64,0.10)', boxShadow: '0 18px 50px rgba(30,35,64,0.16)',
+      width: '198px',
+      transform: vis ? 'translate(0,-50%) scale(1)' : 'translate(calc(-100% - 28px),-50%) scale(0.96)',
+      opacity: vis ? 1 : 0,
+      pointerEvents: vis ? 'auto' : 'none',
+      transition: 'transform .5s cubic-bezier(.18,.82,.2,1), opacity .35s ease'
+    };
+    const handleStyle = {
+      position: 'fixed', left: '0', top: '50%', transform: 'translateY(-50%)', zIndex: 89,
+      display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px',
+      padding: '15px 8px', cursor: 'pointer',
+      background: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
+      border: '1px solid rgba(30,35,64,0.10)', borderLeft: 'none', borderRadius: '0 14px 14px 0',
+      boxShadow: '0 8px 24px rgba(30,35,64,0.10)',
+      opacity: vis ? 0 : 1, pointerEvents: vis ? 'none' : 'auto',
+      transition: 'opacity .3s ease, transform .3s ease'
+    };
+
+    const seg = { padding: '6px 15px', borderRadius: '999px', cursor: 'pointer', fontSize: '12px', fontWeight: 600, border: 'none', background: 'transparent', color: 'rgba(255,255,255,0.55)', transition: 'all .2s', fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.04em' };
+    const onSeg = Object.assign({}, seg, { background: '#fff', color: '#14182B' });
+
+    return {
+      t: STR[lang],
+      formations, experiences, skillGroups, projects, marquee,
+      navItems, navContainerStyle, handleStyle, navLabelStyle,
+      backdropStyle: (vis && isMobile)
+        ? { position: 'fixed', inset: 0, zIndex: 88, background: 'rgba(20,23,40,0.22)', backdropFilter: 'blur(2px)', WebkitBackdropFilter: 'blur(2px)', transition: 'opacity .3s ease' }
+        : { display: 'none' },
+      showNav: () => this.setState({ navVisible: true }),
+      hideNav: () => this.setState({ navVisible: false }),
+      toFr: () => this.setState({ lang: 'fr' }),
+      toEn: () => this.setState({ lang: 'en' }),
+      langFrStyle: lang === 'fr' ? onSeg : seg,
+      langEnStyle: lang === 'en' ? onSeg : seg
+    };
+  }
+}
+</script>
 </body>
 </html>
