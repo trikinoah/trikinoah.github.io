@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
 </head>
-<body>
+<body class="nt-intro-running">
 <x-dc>
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,14 +21,19 @@ a{color:inherit;text-decoration:none;}
 @keyframes ntPulse{0%{box-shadow:0 0 0 0 rgba(67,56,202,0.45);}70%{box-shadow:0 0 0 9px rgba(67,56,202,0);}100%{box-shadow:0 0 0 0 rgba(67,56,202,0);}}
 @keyframes ntMarquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 @keyframes ntFloatY{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
-@keyframes ntIntroShell{0%,68%{opacity:1;visibility:visible;}99%{opacity:0;visibility:visible;}100%{opacity:0;visibility:hidden;}}
-@keyframes ntIntroName{0%{opacity:0;filter:blur(18px);transform:translateY(24px) scale(0.92);letter-spacing:0.08em;}28%{opacity:1;filter:blur(0);transform:translateY(0) scale(1);letter-spacing:0.015em;}64%{opacity:1;filter:blur(0);transform:translateY(0) scale(1);letter-spacing:0;}100%{opacity:0;filter:blur(16px);transform:translateY(-36vh) scale(0.42);letter-spacing:-0.04em;}}
-@keyframes ntIntroLine{0%{transform:scaleX(0);opacity:0;}28%,68%{transform:scaleX(1);opacity:1;}100%{transform:scaleX(.12);opacity:0;}}
-@keyframes ntIntroOrb{0%{transform:scale(.55) rotate(0deg);opacity:0;}30%,70%{opacity:1;}100%{transform:scale(1.35) rotate(28deg);opacity:0;}}
-.nt-intro{animation:ntIntroShell 2.75s cubic-bezier(.2,.7,.2,1) forwards;}
-.nt-intro-name{animation:ntIntroName 2.75s cubic-bezier(.16,.84,.22,1) forwards;}
-.nt-intro-line{animation:ntIntroLine 2.75s cubic-bezier(.2,.7,.2,1) forwards;}
-.nt-intro-orb{animation:ntIntroOrb 2.75s cubic-bezier(.2,.7,.2,1) forwards;}
+@keyframes ntHeroWordIntro{0%{opacity:0;filter:blur(18px);transform:translate(var(--nt-start-x,0px),var(--nt-start-y,0px)) scale(1.18);letter-spacing:0.06em;}22%{opacity:1;filter:blur(0);transform:translate(var(--nt-start-x,0px),var(--nt-start-y,0px)) scale(1.18);letter-spacing:0.01em;}48%{opacity:1;filter:blur(0);transform:translate(var(--nt-start-x,0px),var(--nt-start-y,0px)) scale(1.18);letter-spacing:0;}100%{opacity:1;filter:blur(0);transform:translate(0,0) scale(1);letter-spacing:-0.035em;}}
+@keyframes ntIntroLine{0%{transform:translate(var(--nt-line-x,0px),var(--nt-line-y,0px)) scaleX(0);opacity:0;}24%,54%{transform:translate(var(--nt-line-x,0px),var(--nt-line-y,0px)) scaleX(1);opacity:1;}78%,100%{transform:translate(var(--nt-line-x,0px),var(--nt-line-y,0px)) scaleX(.12);opacity:0;}}
+@keyframes ntIntroOrb{0%{transform:scale(.55) rotate(0deg);opacity:0;}28%,62%{opacity:1;}100%{transform:scale(1.35) rotate(28deg);opacity:0;}}
+.nt-intro{opacity:1;visibility:visible;}
+.nt-intro-line,.nt-intro-orb{opacity:0;}
+.nt-intro.nt-intro-ready .nt-intro-line{animation:ntIntroLine 3.05s cubic-bezier(.2,.7,.2,1) forwards;}
+.nt-intro.nt-intro-ready .nt-intro-orb{animation:ntIntroOrb 3.05s cubic-bezier(.2,.7,.2,1) forwards;}
+.nt-intro.nt-intro-done{display:none!important;}
+body.nt-intro-running{overflow:hidden;}
+body.nt-intro-running #nt-hero-title{position:relative;z-index:501;opacity:1!important;transform:none!important;}
+body.nt-intro-running #nt-hero-title span{display:inline-block;transform-origin:left top;animation:ntHeroWordIntro 3.05s cubic-bezier(.16,.84,.22,1) forwards;}
+body.nt-intro-running #nt-content{z-index:501!important;}
+body.nt-intro-running [data-reveal]:not(#nt-hero-title){opacity:0!important;}
 #nt-content{transition:opacity .5s cubic-bezier(.2,.7,.2,1),transform .5s cubic-bezier(.2,.7,.2,1),filter .5s cubic-bezier(.2,.7,.2,1);}
 #nt-content.nt-lang-switching{opacity:.16;transform:translateY(10px) scale(.992);filter:blur(8px);}
 @media (prefers-reduced-motion:reduce){
@@ -41,10 +46,9 @@ a{color:inherit;text-decoration:none;}
 <div style="min-height:100vh;background:#F8F7F3;font-family:'Hanken Grotesk',sans-serif;color:#1E2340;position:relative;">
 
   <!-- arrival animation -->
-  <div class="nt-intro" aria-hidden="true" style="position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#F8F7F3;pointer-events:none;">
+  <div id="nt-intro" class="nt-intro" aria-hidden="true" style="position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#F8F7F3;pointer-events:none;">
     <div class="nt-intro-orb" style="position:absolute;width:min(72vw,620px);height:min(72vw,620px);border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,0.95),rgba(67,56,202,0.24) 34%,rgba(208,158,92,0.20) 58%,rgba(248,247,243,0) 72%);filter:blur(8px);"></div>
     <div style="position:relative;text-align:center;padding:0 24px;">
-      <div class="nt-intro-name" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(54px,12vw,142px);line-height:.86;color:#1E2340;">Noah <span style="color:#4338CA;">Triki</span></div>
       <div class="nt-intro-line" style="width:min(420px,62vw);height:2px;background:linear-gradient(90deg,transparent,#4338CA,transparent);margin:28px auto 0;transform-origin:center;"></div>
     </div>
   </div>
@@ -104,7 +108,7 @@ a{color:inherit;text-decoration:none;}
         <div data-reveal style="display:inline-flex;align-items:center;gap:9px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.08em;color:#4338CA;text-transform:uppercase;">
           <span style="width:7px;height:7px;border-radius:50%;background:#4338CA;animation:ntPulse 2.4s ease-out infinite;"></span>{{ t.available }}
         </div>
-        <h1 data-reveal style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(58px,8vw,108px);line-height:0.9;letter-spacing:-0.035em;margin:22px 0 0;color:#1E2340;">Noah<br><span style="color:#4338CA;">Triki</span></h1>
+        <h1 id="nt-hero-title" data-reveal style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(58px,8vw,108px);line-height:0.9;letter-spacing:-0.035em;margin:22px 0 0;color:#1E2340;"><span id="nt-hero-noah">Noah</span><br><span id="nt-hero-triki" style="color:#4338CA;">Triki</span></h1>
         <div data-reveal style="font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:0.05em;color:#5B6079;margin-top:22px;text-transform:uppercase;">{{ t.role }}</div>
         <p data-reveal style="font-size:18px;line-height:1.62;color:#4A4F6B;max-width:460px;margin:24px 0 32px;">{{ t.tagline }}</p>
         <div data-reveal style="display:flex;align-items:center;gap:22px;flex-wrap:wrap;">
@@ -120,7 +124,7 @@ a{color:inherit;text-decoration:none;}
     </section>
 
     <!-- MARQUEE -->
-    <div style="overflow:hidden;border-top:1px solid rgba(30,35,64,0.12);border-bottom:1px solid rgba(30,35,64,0.12);padding:16px 0;margin:24px 0 20px;">
+    <div data-reveal style="overflow:hidden;border-top:1px solid rgba(30,35,64,0.12);border-bottom:1px solid rgba(30,35,64,0.12);padding:16px 0;margin:24px 0 20px;">
       <div style="display:flex;width:max-content;animation:ntMarquee 30s linear infinite;" style-hover="animation-play-state:paused;">
         <div style="display:flex;align-items:center;">
           <sc-for list="{{ marquee }}" as="m" hint-placeholder-count="8">
@@ -289,6 +293,7 @@ class Component extends DCLogic {
     window.addEventListener('resize', this._onResize, { passive: true });
     this.scan();
     this.spy();
+    this.startIntroMorph();
   }
   componentWillUnmount() {
     window.removeEventListener('scroll', this._onScroll);
@@ -297,6 +302,7 @@ class Component extends DCLogic {
     if (this.io) this.io.disconnect();
     clearTimeout(this._langTimer);
     clearTimeout(this._fallback);
+    clearTimeout(this._introTimer);
   }
   componentDidUpdate() { this.scan(); }
 
@@ -319,6 +325,73 @@ class Component extends DCLogic {
     const y = window.scrollY + el.getBoundingClientRect().top - 24;
     window.scrollTo({ top: y, behavior: 'smooth' });
     if ((this.state.w || 1280) < 1040) this.setState({ navVisible: false });
+  }
+  startIntroMorph() {
+    const done = () => {
+      this.primeRevealsAfterIntro();
+      document.body.classList.remove('nt-intro-running');
+      const intro = document.getElementById('nt-intro');
+      if (intro) intro.classList.add('nt-intro-done');
+      requestAnimationFrame(() => {
+        this.scan();
+      });
+    };
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      done();
+      return;
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const intro = document.getElementById('nt-intro');
+        const heroNoah = document.getElementById('nt-hero-noah');
+        const heroTriki = document.getElementById('nt-hero-triki');
+        if (!intro || !heroNoah || !heroTriki) {
+          done();
+          return;
+        }
+        const noah = heroNoah.getBoundingClientRect();
+        const triki = heroTriki.getBoundingClientRect();
+        const gap = Math.max(24, Math.min(52, window.innerWidth * 0.034));
+        const total = noah.width + gap + triki.width;
+        const startLeft = (window.innerWidth - total) / 2;
+        const startTop = (window.innerHeight - Math.max(noah.height, triki.height)) / 2;
+        const placeWord = (el, rect, left) => {
+          el.style.setProperty('--nt-start-x', (left - rect.left) + 'px');
+          el.style.setProperty('--nt-start-y', (startTop - rect.top) + 'px');
+        };
+        placeWord(heroNoah, noah, startLeft);
+        placeWord(heroTriki, triki, startLeft + noah.width + gap);
+        const line = intro.querySelector('.nt-intro-line');
+        if (line) {
+          const lineW = Math.min(420, Math.max(220, total * 0.92));
+          line.style.width = lineW + 'px';
+          const lineRect = line.getBoundingClientRect();
+          line.style.setProperty('--nt-line-x', ((window.innerWidth - lineW) / 2 - lineRect.left) + 'px');
+          line.style.setProperty('--nt-line-y', (startTop + Math.max(noah.height, triki.height) + 34 - lineRect.top) + 'px');
+        }
+        intro.classList.add('nt-intro-ready');
+        clearTimeout(this._introTimer);
+        this._introTimer = setTimeout(done, 3050);
+      });
+    });
+  }
+  primeRevealsAfterIntro() {
+    document.querySelectorAll('[data-reveal]').forEach((n) => {
+      if (n.id === 'nt-hero-title') {
+        n.__seen = true;
+        n.__done = true;
+        n.style.opacity = '1';
+        n.style.transform = 'none';
+        return;
+      }
+      n.__seen = false;
+      n.__done = false;
+      const type = n.getAttribute('data-reveal') || 'up';
+      n.style.opacity = '0';
+      n.style.transition = 'opacity .8s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1)';
+      n.style.transform = (type === 'scale') ? 'scale(.92)' : 'translateY(28px)';
+    });
   }
   setLang(lang) {
     if (lang === this.state.lang || this._langTimer) return;
