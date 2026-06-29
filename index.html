@@ -13,7 +13,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;}
-html,body{margin:0;padding:0;scroll-behavior:smooth;}
+html,body{margin:0;padding:0;scroll-behavior:smooth;scrollbar-width:none;-ms-overflow-style:none;}
+html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0;}
 a{color:inherit;text-decoration:none;}
 ::selection{background:#4338CA;color:#fff;}
 @keyframes ntFloatA{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(36px,-34px) scale(1.1);}}
@@ -352,7 +353,7 @@ class Component extends DCLogic {
         }
         const noah = heroNoah.getBoundingClientRect();
         const triki = heroTriki.getBoundingClientRect();
-        const gap = Math.max(24, Math.min(52, window.innerWidth * 0.034));
+        const gap = Math.max(14, Math.min(30, window.innerWidth * 0.02));
         const total = noah.width + gap + triki.width;
         const startLeft = (window.innerWidth - total) / 2;
         const startTop = (window.innerHeight - Math.max(noah.height, triki.height)) / 2;
