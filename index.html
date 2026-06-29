@@ -24,7 +24,7 @@ a{color:inherit;text-decoration:none;}
 @keyframes ntFloatY{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
 @keyframes ntHeroWordIntro{0%{opacity:0;filter:blur(18px);transform:translate(var(--nt-start-x,0px),var(--nt-start-y,0px)) scale(1.18);letter-spacing:0.06em;}22%{opacity:1;filter:blur(0);transform:translate(var(--nt-start-x,0px),var(--nt-start-y,0px)) scale(1.18);letter-spacing:0.01em;}48%{opacity:1;filter:blur(0);transform:translate(var(--nt-start-x,0px),var(--nt-start-y,0px)) scale(1.18);letter-spacing:0;}100%{opacity:1;filter:blur(0);transform:translate(0,0) scale(1);letter-spacing:-0.035em;}}
 @keyframes ntIntroLine{0%{transform:translate(var(--nt-line-x,0px),var(--nt-line-y,0px)) scaleX(0);opacity:0;}24%,54%{transform:translate(var(--nt-line-x,0px),var(--nt-line-y,0px)) scaleX(1);opacity:1;}78%,100%{transform:translate(var(--nt-line-x,0px),var(--nt-line-y,0px)) scaleX(.12);opacity:0;}}
-@keyframes ntIntroOrb{0%{transform:scale(.55) rotate(0deg);opacity:0;}28%,62%{opacity:1;}100%{transform:scale(1.35) rotate(28deg);opacity:0;}}
+@keyframes ntIntroOrb{0%{transform:scale(.62);opacity:0;filter:blur(22px);}24%{opacity:1;transform:scale(1);filter:blur(18px);}54%{opacity:1;transform:scale(1);filter:blur(18px);}100%{opacity:1;transform:translate(var(--nt-orb-x,0px),var(--nt-orb-y,0px)) scale(var(--nt-orb-scale,1));filter:blur(44px);}}
 .nt-intro{opacity:1;visibility:visible;}
 .nt-intro-line,.nt-intro-orb{opacity:0;}
 .nt-intro.nt-intro-ready .nt-intro-line{animation:ntIntroLine 3.05s cubic-bezier(.2,.7,.2,1) forwards;}
@@ -48,7 +48,7 @@ body.nt-intro-running [data-reveal]:not(#nt-hero-title){opacity:0!important;}
 
   <!-- arrival animation -->
   <div id="nt-intro" class="nt-intro" aria-hidden="true" style="position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#F8F7F3;pointer-events:none;">
-    <div class="nt-intro-orb" style="position:absolute;width:min(72vw,620px);height:min(72vw,620px);border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,0.95),rgba(67,56,202,0.24) 34%,rgba(208,158,92,0.20) 58%,rgba(248,247,243,0) 72%);filter:blur(8px);"></div>
+    <div class="nt-intro-orb" style="position:absolute;width:min(72vw,620px);height:min(72vw,620px);border-radius:50%;background:radial-gradient(circle,rgba(67,56,202,0.20),transparent 64%);filter:blur(22px);"></div>
     <div style="position:relative;text-align:center;padding:0 24px;">
       <div class="nt-intro-line" style="width:min(420px,62vw);height:2px;background:linear-gradient(90deg,transparent,#4338CA,transparent);margin:28px auto 0;transform-origin:center;"></div>
     </div>
@@ -61,7 +61,7 @@ body.nt-intro-running [data-reveal]:not(#nt-hero-title){opacity:0!important;}
 
   <!-- ambient blobs -->
   <div style="position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0;">
-    <div style="position:absolute;top:-140px;right:-90px;width:540px;height:540px;border-radius:50%;background:radial-gradient(circle,rgba(67,56,202,0.20),transparent 64%);filter:blur(44px);animation:ntFloatA 17s ease-in-out infinite;"></div>
+    <div id="nt-bg-blue-orb" style="position:absolute;top:-140px;right:-90px;width:540px;height:540px;border-radius:50%;background:radial-gradient(circle,rgba(67,56,202,0.20),transparent 64%);filter:blur(44px);animation:ntFloatA 17s ease-in-out infinite;"></div>
     <div style="position:absolute;bottom:-180px;left:-120px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(208,158,92,0.18),transparent 64%);filter:blur(54px);animation:ntFloatB 21s ease-in-out infinite;"></div>
   </div>
 
@@ -347,13 +347,15 @@ class Component extends DCLogic {
         const intro = document.getElementById('nt-intro');
         const heroNoah = document.getElementById('nt-hero-noah');
         const heroTriki = document.getElementById('nt-hero-triki');
+        const introOrb = intro ? intro.querySelector('.nt-intro-orb') : null;
+        const targetOrb = document.getElementById('nt-bg-blue-orb');
         if (!intro || !heroNoah || !heroTriki) {
           done();
           return;
         }
         const noah = heroNoah.getBoundingClientRect();
         const triki = heroTriki.getBoundingClientRect();
-        const gap = Math.max(14, Math.min(30, window.innerWidth * 0.02));
+        const gap = Math.max(8, Math.min(18, window.innerWidth * 0.011));
         const total = noah.width + gap + triki.width;
         const startLeft = (window.innerWidth - total) / 2;
         const startTop = (window.innerHeight - Math.max(noah.height, triki.height)) / 2;
@@ -370,6 +372,13 @@ class Component extends DCLogic {
           const lineRect = line.getBoundingClientRect();
           line.style.setProperty('--nt-line-x', ((window.innerWidth - lineW) / 2 - lineRect.left) + 'px');
           line.style.setProperty('--nt-line-y', (startTop + Math.max(noah.height, triki.height) + 34 - lineRect.top) + 'px');
+        }
+        if (introOrb && targetOrb) {
+          const from = introOrb.getBoundingClientRect();
+          const to = targetOrb.getBoundingClientRect();
+          introOrb.style.setProperty('--nt-orb-x', (to.left - from.left) + 'px');
+          introOrb.style.setProperty('--nt-orb-y', (to.top - from.top) + 'px');
+          introOrb.style.setProperty('--nt-orb-scale', Math.max(to.width / from.width, to.height / from.height));
         }
         intro.classList.add('nt-intro-ready');
         clearTimeout(this._introTimer);
