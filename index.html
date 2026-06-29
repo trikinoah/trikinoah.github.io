@@ -14,16 +14,40 @@
 <style>
 *{box-sizing:border-box;}
 html,body{margin:0;padding:0;scroll-behavior:smooth;}
+a{color:inherit;text-decoration:none;}
 ::selection{background:#4338CA;color:#fff;}
 @keyframes ntFloatA{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(36px,-34px) scale(1.1);}}
 @keyframes ntFloatB{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-30px,28px) scale(1.08);}}
 @keyframes ntPulse{0%{box-shadow:0 0 0 0 rgba(67,56,202,0.45);}70%{box-shadow:0 0 0 9px rgba(67,56,202,0);}100%{box-shadow:0 0 0 0 rgba(67,56,202,0);}}
 @keyframes ntMarquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 @keyframes ntFloatY{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+@keyframes ntIntroShell{0%,68%{opacity:1;visibility:visible;}99%{opacity:0;visibility:visible;}100%{opacity:0;visibility:hidden;}}
+@keyframes ntIntroName{0%{opacity:0;filter:blur(18px);transform:translateY(24px) scale(0.92);letter-spacing:0.08em;}28%{opacity:1;filter:blur(0);transform:translateY(0) scale(1);letter-spacing:0.015em;}64%{opacity:1;filter:blur(0);transform:translateY(0) scale(1);letter-spacing:0;}100%{opacity:0;filter:blur(16px);transform:translateY(-36vh) scale(0.42);letter-spacing:-0.04em;}}
+@keyframes ntIntroLine{0%{transform:scaleX(0);opacity:0;}28%,68%{transform:scaleX(1);opacity:1;}100%{transform:scaleX(.12);opacity:0;}}
+@keyframes ntIntroOrb{0%{transform:scale(.55) rotate(0deg);opacity:0;}30%,70%{opacity:1;}100%{transform:scale(1.35) rotate(28deg);opacity:0;}}
+.nt-intro{animation:ntIntroShell 2.75s cubic-bezier(.2,.7,.2,1) forwards;}
+.nt-intro-name{animation:ntIntroName 2.75s cubic-bezier(.16,.84,.22,1) forwards;}
+.nt-intro-line{animation:ntIntroLine 2.75s cubic-bezier(.2,.7,.2,1) forwards;}
+.nt-intro-orb{animation:ntIntroOrb 2.75s cubic-bezier(.2,.7,.2,1) forwards;}
+#nt-content{transition:opacity .5s cubic-bezier(.2,.7,.2,1),transform .5s cubic-bezier(.2,.7,.2,1),filter .5s cubic-bezier(.2,.7,.2,1);}
+#nt-content.nt-lang-switching{opacity:.16;transform:translateY(10px) scale(.992);filter:blur(8px);}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important;}
+  .nt-intro{display:none!important;}
+}
 </style>
 </helmet>
 
 <div style="min-height:100vh;background:#F8F7F3;font-family:'Hanken Grotesk',sans-serif;color:#1E2340;position:relative;">
+
+  <!-- arrival animation -->
+  <div class="nt-intro" aria-hidden="true" style="position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#F8F7F3;pointer-events:none;">
+    <div class="nt-intro-orb" style="position:absolute;width:min(72vw,620px);height:min(72vw,620px);border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,0.95),rgba(67,56,202,0.24) 34%,rgba(208,158,92,0.20) 58%,rgba(248,247,243,0) 72%);filter:blur(8px);"></div>
+    <div style="position:relative;text-align:center;padding:0 24px;">
+      <div class="nt-intro-name" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(54px,12vw,142px);line-height:.86;color:#1E2340;">Noah <span style="color:#4338CA;">Triki</span></div>
+      <div class="nt-intro-line" style="width:min(420px,62vw);height:2px;background:linear-gradient(90deg,transparent,#4338CA,transparent);margin:28px auto 0;transform-origin:center;"></div>
+    </div>
+  </div>
 
   <!-- scroll progress -->
   <div style="position:fixed;top:0;left:0;width:100%;height:3px;z-index:200;pointer-events:none;">
@@ -72,7 +96,7 @@ html,body{margin:0;padding:0;scroll-behavior:smooth;}
   </nav>
 
   <!-- ============ CONTENT ============ -->
-  <div style="position:relative;z-index:1;">
+  <div id="nt-content" style="position:relative;z-index:1;">
 
     <!-- HERO -->
     <section id="hero" data-screen-label="Hero" data-reveal-group style="max-width:1080px;margin:0 auto;padding:clamp(116px,18vw,150px) clamp(20px,5vw,40px) 60px;display:flex;flex-wrap:wrap;gap:clamp(36px,5vw,72px);align-items:center;">
@@ -85,7 +109,7 @@ html,body{margin:0;padding:0;scroll-behavior:smooth;}
         <p data-reveal style="font-size:18px;line-height:1.62;color:#4A4F6B;max-width:460px;margin:24px 0 32px;">{{ t.tagline }}</p>
         <div data-reveal style="display:flex;align-items:center;gap:22px;flex-wrap:wrap;">
           <span data-magnetic style="display:inline-block;transition:transform .25s cubic-bezier(.2,.7,.2,1);">
-            <a href="https://www.linkedin.com/in/noah-triki/" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:#1E2340;color:#fff;padding:14px 26px;border-radius:8px;font-weight:600;font-size:15px;transition:all 0.22s;" style-hover="background:#4338CA;transform:translateY(-3px);box-shadow:0 14px 28px rgba(67,56,202,0.28);">{{ t.cta }} <span style="font-family:'JetBrains Mono',monospace;">→</span></a>
+            <a href="https://www.linkedin.com/in/noah-triki/" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:#1E2340;color:#fff;padding:14px 26px;border-radius:8px;font-weight:600;font-size:15px;transition:background .36s cubic-bezier(.2,.7,.2,1),transform .36s cubic-bezier(.2,.7,.2,1),box-shadow .36s cubic-bezier(.2,.7,.2,1),color .36s cubic-bezier(.2,.7,.2,1);" style-hover="background:#4338CA;transform:translateY(-3px);box-shadow:0 14px 28px rgba(67,56,202,0.28);">{{ t.cta }} <span style="font-family:'JetBrains Mono',monospace;">→</span></a>
           </span>
           <span style="display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:13px;color:#5B6079;"><span style="width:5px;height:5px;border-radius:50%;background:#4338CA;"></span>{{ t.location }}</span>
         </div>
@@ -122,7 +146,7 @@ html,body{margin:0;padding:0;scroll-behavior:smooth;}
           <h3 data-reveal style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#4338CA;margin:0 0 18px;">{{ t.formations }}</h3>
           <div style="display:flex;flex-direction:column;gap:14px;">
             <sc-for list="{{ formations }}" as="f" hint-placeholder-count="3">
-              <div data-reveal style="background:#fff;border:1px solid rgba(30,35,64,0.10);border-radius:12px;padding:20px 22px;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s,border-color .3s;" style-hover="transform:translateY(-4px);border-color:#4338CA;box-shadow:0 16px 38px rgba(30,35,64,0.10);">
+              <div data-reveal style="background:#fff;border:1px solid rgba(30,35,64,0.10);border-radius:12px;padding:20px 22px;transition:transform .38s cubic-bezier(.2,.7,.2,1),box-shadow .38s cubic-bezier(.2,.7,.2,1),border-color .38s cubic-bezier(.2,.7,.2,1);" style-hover="transform:translateY(-4px);border-color:#4338CA;box-shadow:0 16px 38px rgba(30,35,64,0.10);">
                 <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B7088;letter-spacing:0.04em;margin-bottom:10px;">{{ f.period }}</div>
                 <h4 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:20px;margin:0 0 2px;color:#1E2340;letter-spacing:-0.01em;">{{ f.title }}</h4>
                 <div style="font-size:13px;font-weight:600;color:#4338CA;margin-bottom:6px;">{{ f.org }}</div>
@@ -139,7 +163,7 @@ html,body{margin:0;padding:0;scroll-behavior:smooth;}
           <h3 data-reveal style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#4338CA;margin:0 0 18px;">{{ t.experiences }}</h3>
           <div style="display:flex;flex-direction:column;gap:14px;">
             <sc-for list="{{ experiences }}" as="f" hint-placeholder-count="5">
-              <div data-reveal style="background:#fff;border:1px solid rgba(30,35,64,0.10);border-radius:12px;padding:20px 22px;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s,border-color .3s;" style-hover="transform:translateY(-4px);border-color:#4338CA;box-shadow:0 16px 38px rgba(30,35,64,0.10);">
+              <div data-reveal style="background:#fff;border:1px solid rgba(30,35,64,0.10);border-radius:12px;padding:20px 22px;transition:transform .38s cubic-bezier(.2,.7,.2,1),box-shadow .38s cubic-bezier(.2,.7,.2,1),border-color .38s cubic-bezier(.2,.7,.2,1);" style-hover="transform:translateY(-4px);border-color:#4338CA;box-shadow:0 16px 38px rgba(30,35,64,0.10);">
                 <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px;">
                   <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B7088;letter-spacing:0.04em;">{{ f.period }}</span>
                   <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:#4338CA;background:rgba(67,56,202,0.08);border:1px solid rgba(67,56,202,0.18);padding:4px 10px;border-radius:999px;white-space:nowrap;">{{ f.contract }}</span>
@@ -169,7 +193,7 @@ html,body{margin:0;padding:0;scroll-behavior:smooth;}
           <h3 data-reveal style="flex:0 0 200px;font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:20px;margin:0;color:#1E2340;letter-spacing:-0.01em;">{{ g.label }}</h3>
           <div style="flex:1 1 280px;display:flex;flex-wrap:wrap;gap:10px;">
             <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="5">
-              <span data-reveal style="font-size:13.5px;font-weight:500;color:#3A3F5C;background:#fff;border:1px solid rgba(30,35,64,0.13);padding:8px 15px;border-radius:999px;cursor:default;transition:transform .25s cubic-bezier(.2,.7,.2,1),background .25s,color .25s,border-color .25s,box-shadow .25s;" style-hover="transform:translateY(-4px) scale(1.06);border-color:#4338CA;color:#fff;background:#4338CA;box-shadow:0 10px 22px rgba(67,56,202,0.30);">{{ it }}</span>
+              <span data-reveal style="font-size:13.5px;font-weight:500;color:#3A3F5C;background:#fff;border:1px solid rgba(30,35,64,0.13);padding:8px 15px;border-radius:999px;cursor:default;transition:transform .34s cubic-bezier(.2,.7,.2,1),background .34s cubic-bezier(.2,.7,.2,1),color .34s cubic-bezier(.2,.7,.2,1),border-color .34s cubic-bezier(.2,.7,.2,1),box-shadow .34s cubic-bezier(.2,.7,.2,1);" style-hover="transform:translateY(-4px) scale(1.06);border-color:#4338CA;color:#fff;background:#4338CA;box-shadow:0 10px 22px rgba(67,56,202,0.30);">{{ it }}</span>
             </sc-for>
           </div>
         </div>
@@ -184,7 +208,7 @@ html,body{margin:0;padding:0;scroll-behavior:smooth;}
       </div>
       <div data-reveal-group style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;">
         <sc-for list="{{ projects }}" as="p" hint-placeholder-count="2">
-          <a href="{{ p.href }}" target="_blank" data-reveal style="display:block;padding:32px;border:1px solid rgba(30,35,64,0.13);border-radius:14px;background:#fff;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s,border-color .3s;" style-hover="border-color:#4338CA;transform:translateY(-6px);box-shadow:0 22px 48px rgba(30,35,64,0.12);">
+          <a href="{{ p.href }}" target="_blank" data-reveal style="display:block;padding:32px;border:1px solid rgba(30,35,64,0.13);border-radius:14px;background:#fff;transition:transform .42s cubic-bezier(.2,.7,.2,1),box-shadow .42s cubic-bezier(.2,.7,.2,1),border-color .42s cubic-bezier(.2,.7,.2,1),background .42s cubic-bezier(.2,.7,.2,1);" style-hover="border-color:#4338CA;transform:translateY(-6px);box-shadow:0 22px 48px rgba(30,35,64,0.12);">
             <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#4338CA;margin-bottom:18px;">{{ p.tag }}</div>
             <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:27px;margin:0 0 12px;color:#1E2340;letter-spacing:-0.015em;">{{ p.name }}</h3>
             <p style="font-size:14.5px;line-height:1.6;color:#5B6079;margin:0 0 22px;">{{ p.desc }}</p>
@@ -200,7 +224,7 @@ html,body{margin:0;padding:0;scroll-behavior:smooth;}
         <h2 data-reveal style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(36px,5vw,58px);letter-spacing:-0.025em;margin:0 0 16px;color:#1E2340;line-height:1.0;">{{ t.footerTitle }}</h2>
         <p data-reveal style="font-size:17px;line-height:1.6;color:#5B6079;max-width:500px;margin:0 auto 34px;">{{ t.footerSub }}</p>
         <span data-reveal data-magnetic style="display:inline-block;transition:transform .25s cubic-bezier(.2,.7,.2,1);">
-          <a href="https://www.linkedin.com/in/noah-triki/" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:#1E2340;color:#fff;padding:16px 30px;border-radius:8px;font-weight:600;font-size:16px;transition:all 0.22s;" style-hover="background:#4338CA;transform:translateY(-3px);box-shadow:0 14px 28px rgba(67,56,202,0.28);">{{ t.cta }} <span style="font-family:'JetBrains Mono',monospace;">→</span></a>
+          <a href="https://www.linkedin.com/in/noah-triki/" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:#1E2340;color:#fff;padding:16px 30px;border-radius:8px;font-weight:600;font-size:16px;transition:background .36s cubic-bezier(.2,.7,.2,1),transform .36s cubic-bezier(.2,.7,.2,1),box-shadow .36s cubic-bezier(.2,.7,.2,1),color .36s cubic-bezier(.2,.7,.2,1);" style-hover="background:#4338CA;transform:translateY(-3px);box-shadow:0 14px 28px rgba(67,56,202,0.28);">{{ t.cta }} <span style="font-family:'JetBrains Mono',monospace;">→</span></a>
         </span>
         <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9499AE;margin-top:54px;">© 2026 — Noah Triki</div>
       </div>
@@ -271,6 +295,8 @@ class Component extends DCLogic {
     window.removeEventListener('mousemove', this._onMove);
     window.removeEventListener('resize', this._onResize);
     if (this.io) this.io.disconnect();
+    clearTimeout(this._langTimer);
+    clearTimeout(this._fallback);
   }
   componentDidUpdate() { this.scan(); }
 
@@ -293,6 +319,23 @@ class Component extends DCLogic {
     const y = window.scrollY + el.getBoundingClientRect().top - 24;
     window.scrollTo({ top: y, behavior: 'smooth' });
     if ((this.state.w || 1280) < 1040) this.setState({ navVisible: false });
+  }
+  setLang(lang) {
+    if (lang === this.state.lang || this._langTimer) return;
+    const content = document.getElementById('nt-content');
+    if (!content || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      this.setState({ lang });
+      return;
+    }
+    content.classList.add('nt-lang-switching');
+    this._langTimer = setTimeout(() => {
+      this.setState({ lang });
+      requestAnimationFrame(() => {
+        const current = document.getElementById('nt-content') || content;
+        current.classList.remove('nt-lang-switching');
+        this._langTimer = null;
+      });
+    }, 230);
   }
 
   reveal(n) {
@@ -445,7 +488,7 @@ class Component extends DCLogic {
           color: on ? '#4338CA' : '#5B6079',
           opacity: vis ? 1 : 0,
           transform: vis ? 'translateX(0)' : 'translateX(-16px)',
-          transition: 'background .22s, color .22s, opacity .4s ease, transform .5s cubic-bezier(.2,.8,.2,1)',
+          transition: 'background .34s cubic-bezier(.2,.7,.2,1), color .34s cubic-bezier(.2,.7,.2,1), opacity .4s ease, transform .5s cubic-bezier(.2,.8,.2,1)',
           transitionDelay: vis ? (0.05 + idx * 0.05) + 's' : '0s'
         },
         numStyle: {
@@ -478,7 +521,7 @@ class Component extends DCLogic {
       transition: 'opacity .3s ease, transform .3s ease'
     };
 
-    const seg = { padding: '6px 15px', borderRadius: '999px', cursor: 'pointer', fontSize: '12px', fontWeight: 600, border: 'none', background: 'transparent', color: 'rgba(255,255,255,0.55)', transition: 'all .2s', fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.04em' };
+    const seg = { padding: '6px 15px', borderRadius: '999px', cursor: 'pointer', fontSize: '12px', fontWeight: 600, border: 'none', background: 'transparent', color: 'rgba(255,255,255,0.55)', transition: 'background .34s cubic-bezier(.2,.7,.2,1), color .34s cubic-bezier(.2,.7,.2,1), transform .34s cubic-bezier(.2,.7,.2,1), box-shadow .34s cubic-bezier(.2,.7,.2,1)', fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.04em' };
     const onSeg = Object.assign({}, seg, { background: '#fff', color: '#14182B' });
 
     return {
@@ -490,8 +533,8 @@ class Component extends DCLogic {
         : { display: 'none' },
       showNav: () => this.setState({ navVisible: true }),
       hideNav: () => this.setState({ navVisible: false }),
-      toFr: () => this.setState({ lang: 'fr' }),
-      toEn: () => this.setState({ lang: 'en' }),
+      toFr: () => this.setLang('fr'),
+      toEn: () => this.setLang('en'),
       langFrStyle: lang === 'fr' ? onSeg : seg,
       langEnStyle: lang === 'en' ? onSeg : seg
     };
